@@ -3,6 +3,7 @@
     #if it is the first time    
     #ask player 1 name    
     #ask player 2 name  
+    #Symbol
 #end
 
 #while there is no winner or there was less than 9 moves    
@@ -39,6 +40,7 @@ def symbol_validation(player_name)
     begin
       puts "Available symbols: #{@available_symbols}"
       symbol= gets.chomp.upcase
+
       if @available_symbols.none? { |el| el == symbol}
         raise TypeError
       end
@@ -47,18 +49,27 @@ def symbol_validation(player_name)
       symbol = nil
     end
   end
+  @available_symbols.each_with_index {|el,index| 
+        if el==symbol 
+            @available_symbols.delete_at(index) 
+        end
+        }  
   return symbol
+
 end
 
 while play_again
   if times == 0
     puts "Type player 1 name:"
     player1_name = gets.chomp.to_s #it will be an attribute when the logic was ready
-    symbol_validation(player1_name)
+    player1_symbol=symbol_validation(player1_name)
+    puts "Type player 2 name:"
+    player2_name = gets.chomp.to_s #it will be an attribute when the logic was ready
+    player2_symbol=symbol_validation(player2_name)
   end
   play_again = false
 end
 
-    
+
 
 
