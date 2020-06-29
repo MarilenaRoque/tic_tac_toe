@@ -29,11 +29,12 @@
 # end
 
 @available_symbols = [ "X", "O", "#", "*"]
+@board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 play_again = true
 times = 0
 
 def symbol_validation(player_name)
-  print @available_symbols
+#   print @available_symbols
   symbol = nil
   puts "Choose #{player_name} symbol:"
   while !symbol
@@ -58,6 +59,19 @@ def symbol_validation(player_name)
 
 end
 
+
+
+def print_board
+    puts "---------------"
+    @board.each {|el|
+        el.each { |value|
+            print "| #{value} |"
+        }
+        puts " "
+        puts "---------------"
+    }
+end
+
 while play_again
   if times == 0
     puts "Type player 1 name:"
@@ -67,9 +81,9 @@ while play_again
     player2_name = gets.chomp.to_s #it will be an attribute when the logic was ready
     player2_symbol=symbol_validation(player2_name)
   end
+  print_board
   play_again = false
 end
-
 
 
 
