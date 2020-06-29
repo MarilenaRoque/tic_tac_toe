@@ -27,3 +27,38 @@
     # if no break the loop
 # end
 
+@available_symbols = [ "X", "O", "#", "*"]
+play_again = true
+times = 0
+
+def symbol_validation(player_name)
+  print @available_symbols
+  symbol = nil
+  puts "Choose #{player_name} symbol:"
+  while !symbol
+    begin
+      puts "Available symbols: #{@available_symbols}"
+      symbol= gets.chomp.upcase
+      if @available_symbols.none? { |el| el == symbol}
+        raise TypeError
+      end
+    rescue TypeError
+      puts "Choose an available symbol:"
+      symbol = nil
+    end
+  end
+  return symbol
+end
+
+while play_again
+  if times == 0
+    puts "Type player 1 name:"
+    player1_name = gets.chomp.to_s #it will be an attribute when the logic was ready
+    symbol_validation(player1_name)
+  end
+  play_again = false
+end
+
+    
+
+
