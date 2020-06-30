@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
-require "./lib/player.rb"
+require './lib/board.rb'
+require './lib/player.rb'
 
-
+play_again = 0
 times = 0
 
 def symbol_validation(player_name)
@@ -24,75 +25,59 @@ def symbol_validation(player_name)
   symbol
 end
 
-def print_board
-  puts '---------------'
-  @board.each do |el|
-    el.each do |value|
-      print "| #{value} |"
-    end
-    puts ' '
-    puts '---------------'
+def move_input(name)
+  @table.print_board
+  current_position = false
+  while @table.available_position.none? {|el| el == current_position}
+    puts "Invalid move!" unless current_position == false
+    puts "#{name}, Choose your position: #{@table.available_position}"
+    current_position = gets.chomp.to_i
+    @table.available_position.none? {|el| el == current_position}
   end
+  current_position
 end
+    
 
-play_again = 0
-while play_again != '1'
-  @available_symbols = ['X', 'O', '#', '*']
-  @board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-  @available_moves = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+until play_again == "1"
+  @table = Board.new
   if times.zero?
     puts 'Type player 1 name:'
-    player1_name = gets.chomp.to_s # it will be an attribute when the logic was ready
+    player1_name = gets.chomp.to_s 
     player1_symbol = symbol_validation(player1_name)
+    player1 = Player.new(player1_name, player1_symbol)
     puts 'Type player 2 name:'
-    player2_name = gets.chomp.to_s # it will be an attribute when the logic was ready
+    player2_name = gets.chomp.to_s
     player2_symbol = symbol_validation(player2_name)
+    player2 = Player.new(player2_name, player2_symbol)
   end
-  current_player = player1_name
-  current_symbol = player1_symbol
 
-  until @available_moves.empty?
-    print_board
+  current_player = player1
 
-    # this verification will be a outside method for the logic part
-
-    begin
-      puts " #{current_player}, choose your position:"
-      current_position = gets.chomp.to_i
-      raise TypeError if @available_moves.none? { |el| el == current_position }
-    rescue TypeError
-      system('clear')
-      puts 'Choose one of the available moves:'
-      puts "Available moves: #{@available_moves}"
-    else
-      system('clear')
-      @board.each do |el|
-        el.each_with_index do |value, index|
-          el[index] = current_symbol if value == current_position
-        end
+  until @table.available_position.empty?
+    current_position = move_input(current_player.name)
+    puts "This is the position: #{current_position}"
+    @table.position.each do |el|
+      el.each_with_index do |value, index|
+        el[index] = current_player.symbol if value == current_position
       end
-
-      # For the next milestone we will build a method to test if there is a winner
-      # winner = is_there_a_winner?
-      winner = false # this isn't work yet
-      if winner
-
-        puts "Congrats #{current_player}. You're the winner!"
-        break
-      end
-
-      @available_moves.each_with_index do |el, index|
-        @available_moves.delete_at(index) if el == current_position
-      end
-
-      current_player = @available_moves.length.even? ? player2_name : player1_name
-      current_symbol = @available_moves.length.even? ? player2_symbol : player1_symbol
     end
+    @table.available_position.each_with_index do |el, index|
+      @table.available_position.delete_at(index) if el == current_position
+    end
+
+    winner = true # this isn't work yet
+    if winner
+      @table.print_board
+      puts "Congrats #{current_player.name}. You're the winner!"
+      break
+    end
+
+    current_player = @table.available_position.length.even? ? player2 : player1
   end
 
+  @table.print_board
   puts ' It is a draw!' unless winner
 
-  print_board
   puts 'Press 1 to quit, or any other option to a new round'
   play_again = gets.chomp.to_s
   times += 1
