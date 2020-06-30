@@ -65,7 +65,8 @@ def print_board
   end
 end
 
-while play_again
+play_again = 0
+while play_again != 1
   if times == 0
     puts 'Type player 1 name:'
     player1_name = gets.chomp.to_s # it will be an attribute when the logic was ready
@@ -74,11 +75,9 @@ while play_again
     player2_name = gets.chomp.to_s # it will be an attribute when the logic was ready
     player2_symbol = symbol_validation(player2_name)
   end
-  current_player = player1_name
-  current_symbol = player1_symbol
 
-
-  9.times do |counter|
+  counter = 0
+  while !@available_moves.empty?
     puts "I am a counter #{counter}"
     print_board
 
@@ -91,22 +90,37 @@ while play_again
     rescue TypeError
       puts 'Choose one of the available moves:'
       puts "Available moves: #{@available_moves}"
-      puts 'I am here'
     else
       @board.each do |el|
         el.each_with_index do |value, index|
           el[index] = current_symbol if value == current_position
         end
       end
-      current_player = !counter.odd? ? player2_name : player1_name 
-      current_symbol = !counter.odd? ? player2_symbol : player1_symbol
+
+      # For the next milestone we will build a method to test if there is a winner
+      # winner = is_there_a_winner?
+      winner = true  #this isn't work yet
+      if winner
+        puts "Congrats #{current_player}. You're the winner!"
+        break
+      end
     
       @available_moves.each_with_index do |el, index|
         @available_moves.delete_at(index) if el == current_position
       end
+
+      current_player = !@available_moves.length.odd? ? player2_name : player1_name 
+      current_symbol = !@available_moves.length.odd? ? player2_symbol : player1_symbol
     end
-    
+    puts "\n\n\n"
+
   end
+
+  if !winner 
+    puts " It is a draw!"
+  end
+  
   print_board
-  play_again = false 
+  puts "Press 1 to quit, or any other option to a new round"
+  play_again = gets.chomp
 end
