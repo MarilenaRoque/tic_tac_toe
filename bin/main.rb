@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+require "./lib/player.rb"
+
 
 times = 0
 
