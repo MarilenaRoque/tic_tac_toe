@@ -26,7 +26,7 @@ def symbol_validation(player_name)
 end
 
 def move_input(name)
-  @table.print_board
+  puts @table.print_board
   current_position = false
   while @table.available_position.none? {|el| el == current_position}
     puts "Invalid move!" unless current_position == false
@@ -67,7 +67,7 @@ until play_again == "1"
 
     winner = true # this isn't work yet
     if winner
-      @table.print_board
+      puts @table.print_board
       puts "Congrats #{current_player.name}. You're the winner!"
       break
     end
@@ -75,7 +75,7 @@ until play_again == "1"
     current_player = @table.available_position.length.even? ? player2 : player1
   end
 
-  @table.print_board
+  puts @table.print_board
   puts ' It is a draw!' unless winner
 
   puts 'Press 1 to quit, or any other option to a new round'
