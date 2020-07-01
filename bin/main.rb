@@ -52,20 +52,23 @@ until play_again == "1"
   end
 
   current_player = player1
-
+  move = 0
   until @table.available_position.empty?
     current_position = move_input(current_player.name)
-    puts "This is the position: #{current_position}"
-    @table.position.each do |el|
-      el.each_with_index do |value, index|
-        el[index] = current_player.symbol if value == current_position
+    @table.position.each_with_index do |el, index1|
+      el.each_with_index do |value, index2|
+        if value == current_position
+          el[index2] = current_player.symbol
+          move = [index1, index2]
+        end
       end
     end
+
+
     @table.available_position.each_with_index do |el, index|
       @table.available_position.delete_at(index) if el == current_position
     end
-
-    winner = true # this isn't work yet
+    winner = @table.check_winner(move, current_player.symbol)
     if winner
       puts @table.print_board
       puts "Congrats #{current_player.name}. You're the winner!"
