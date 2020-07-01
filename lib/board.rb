@@ -3,7 +3,7 @@ class Board
     @position = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     @available_position = @position.flatten
   end
-  attr_accessor :position, :available_position
+  attr_reader :position, :available_position
   def print_board
     string_board = "-----------------\n"
     position.each do |el|
@@ -13,6 +13,25 @@ class Board
       string_board += "\n-----------------\n"
     end
     string_board
+  end
+
+  def replace_symbol(current_position, current_player)
+    move = 0
+    position.each_with_index do |el, index1|
+      el.each_with_index do |value, index2|
+        if value == current_position
+          el[index2] = current_player.symbol
+          move = [index1, index2]
+        end
+      end
+    end
+    move
+  end
+
+  def remove_position(current_position)
+    available_position.each_with_index do |el, index|
+      available_position.delete_at(index) if el == current_position
+    end
   end
 
   def check_winner(move, symbol)

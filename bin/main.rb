@@ -52,21 +52,11 @@ until play_again == '1'
   end
 
   current_player = player1
-  move = 0
+
   until @table.available_position.empty?
     current_position = move_input(current_player.name)
-    @table.position.each_with_index do |el, index1|
-      el.each_with_index do |value, index2|
-        if value == current_position
-          el[index2] = current_player.symbol
-          move = [index1, index2]
-        end
-      end
-    end
-
-    @table.available_position.each_with_index do |el, index|
-      @table.available_position.delete_at(index) if el == current_position
-    end
+    move = @table.replace_symbol(current_position, current_player)
+    @table.remove_position(current_position)
     winner = @table.check_winner(move, current_player.symbol)
     if winner
       system('clear')
