@@ -14,7 +14,7 @@ To have a version on you local machine:
 ## Live Demo
 - You can also use the Live Demo to play it online
 ​
-[Live Demo](https://repl.it/@MarilenaRoque/MilestonesTic-tac-toe#main.rb)
+[Live Demo ](https://repl.it/@MarilenaRoque/MilestonesTic-tac-toe#main.rb)
 ​
 ## Instructions to Play
 
