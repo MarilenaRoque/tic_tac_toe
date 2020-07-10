@@ -15,5 +15,14 @@ describe Board do
       end
     end
 
+    describe "#print_board" do
+      before(:all) do
+        @table = Board.new
+      end
+      it "test the new string format for the print board method" do
+        expectation="-----------------\n"+ "| 1 | " + "| 2 | "+ "| 3 | "+ "\n-----------------\n"+ "| 4 | "+ "| 5 | "+ "| 6 | "+  "\n-----------------\n"+"| 7 | "+"| 8 | "+"| 9 | "+ "\n-----------------\n"
+        expect(@table.print_board).to eq(expectation)        
+      end
+    end
 end
 
