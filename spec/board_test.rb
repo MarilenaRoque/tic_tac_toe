@@ -1,4 +1,5 @@
 require '../lib/board.rb'
+require '../lib/player.rb'
 
 
 describe Board do
@@ -24,5 +25,24 @@ describe Board do
         expect(@table.print_board).to eq(expectation)        
       end
     end
+
+    describe "#replace_symbol" do
+      before(:all) do
+        @table = Board.new
+        @example_player= Player.new("jorge", "X")
+      end
+      it "test if the replace return the right move" do
+        expect(@table.replace_symbol( 5, @example_player)).to eq([1,1])        
+      end
+      it "test if the right position was replaced" do
+        @table.replace_symbol( 5, @example_player)
+        expect(@table.position[1][1]).to_not eq(5)        
+      end
+      it "test if the right symbol was replaced" do
+        @table.replace_symbol( 5, @example_player)
+        expect(@table.position[1][1]).to eq("X")        
+      end
+    end
+
 end
 
