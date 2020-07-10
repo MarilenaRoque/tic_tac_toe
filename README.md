@@ -34,7 +34,7 @@ To have a version on you local machine:
 ![screenshot](./img/4.png)
 
 - The players will switch roles to mark their symbols on the table until one of those acomplish mark one whole column, row or diagonal, or until there is no more movements available. On this case we have a draw.
-Collapse
+
 
 
 ## Authors
@@ -49,9 +49,29 @@ Collapse
 
 👤 **Jasem Valencia**
 
-- Github: [@githubhandle](https://github.com/JasemDuncan)
-- Twitter: [@twitterhandle](https://twitter.com/JasemValencia)
-- Linkedin: [@linkedin](www.linkedin.com/in/Jasem-Duncan-Valencia)
+- Github: [@JasemDuncan](https://github.com/JasemDuncan)
+- Twitter: [@JasemValencia](https://twitter.com/JasemValencia)
+- Linkedin: [@JasemValencia](www.linkedin.com/in/Jasem-Duncan-Valencia)
+
+
+## RSpec Testing
+
+This folder contains a file to test the methods on the board.rb and player.rb files.
+To run the tests you will need to install the RSpec Gem
+You can do it running the following command on your terminal machine:
+
+>- gem install rspec
+
+After successfully installed the Gem you can access the spec folder and run the following command to check the results.
+
+>- rspec board_test.rb 
+
+To test the board class methods.
+
+>- rspec player_test.rb
+
+To test the player class methods.
+
 
 ## 🤝 Contributing
 
