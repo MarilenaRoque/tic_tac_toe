@@ -1,6 +1,7 @@
 # Tic_Tac_Toe
-Tic-tac-toe game developed using Ruby
+Tic-tac-toe game developed using pure Ruby.
 ​
+
 Tic-tac-toe is a game for two players, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
 If none of the player acomplish it we will have a draw.
 ​
